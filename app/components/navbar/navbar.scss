@@ -1,0 +1,65 @@
+.drop{
+  padding: 0px;
+  color: red;
+}
+
+li{
+  // line-height: 55px;
+  color: white;
+}
+
+
+
+.navbar-right{
+  height: 35px; 
+}
+
+.navbar-nav > li > a {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.navbar{
+  background-color: green;
+  margin-bottom: 0px;
+  border-radius: 0px;
+  border: 0px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 7px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin-right: 5px;
+  
+}
+
+li.dropdown {
+    vertical-align: middle;
+}
+
+div#bs-example-navbar-collapse-1 {
+    vertical-align: middle;
+}
+
+ul.nav.navbar-nav.navbar-right {
+    vertical-align: middle;
+    margin: 6px 0 0 0;
+}
+

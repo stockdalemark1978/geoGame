@@ -42,7 +42,7 @@ var appCtrl = function appCtrl() {
 exports.default = appCtrl;
 
 },{}],3:[function(require,module,exports){
-module.exports = "<navbar></navbar>\n<navbar2></navbar2>\n<map></map>\n<results></results>\n<h1>hello</h1>";
+module.exports = "\n<navbar></navbar>\n\n<navbar2 id=\"nav2\"></navbar2>\n\n<!--<navbar2></navbar2>\n<map></map>\n<results></results>-->\n";
 
 },{}],4:[function(require,module,exports){
 'use strict';
@@ -165,8 +165,9 @@ var navbarController = function navbarController($rootScope, $interval) {
 exports.default = navbarController;
 
 },{}],10:[function(require,module,exports){
-arguments[4][7][0].apply(exports,arguments)
-},{"dup":7}],11:[function(require,module,exports){
+module.exports = "<nav class=\"navbar navbar-default\">\n  <div class=\"container-fluid\">\n    <!-- Brand and toggle get grouped for better mobile display -->\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n    </div>\n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n      <ul class=\"nav navbar-nav\">\n      </ul>\n      <!--<form class=\"navbar-form navbar-left\">\n        <div class=\"form-group\">\n          <input id=\"search\" type=\"text\" class=\"form-control\" placeholder=\"Search\">\n        </div>\n        <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n      </form>-->\n      <ul class=\"nav navbar-nav navbar-right\">\n        <li><button type=\"button\" class=\"btn btn-default\" aria-label=\"Left Align\">\n  <span class=\"glyphicon glyphicon-user\" aria-hidden=\"true\"></span>\n</button>   Profile     </li>\n        \n        <li class=\"dropdown drop\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\"><button type=\"button\" class=\"btn btn-default\" aria-label=\"Left Align\">\n  <span class=\"glyphicon glyphicon-chevron-down\" aria-hidden=\"true\"></span>\n</button></a>\n          <ul class=\"dropdown-menu\">\n            <li><a href=\"#\">Action</a></li>\n            <li><a href=\"#\">Another action</a></li>\n            <li><a href=\"#\">Something else here</a></li>\n            <li role=\"separator\" class=\"divider\"></li>\n            <li><a href=\"#\">Separated link</a></li>\n          </ul>\n        </li>\n      </ul>\n    </div>\n  </div><!-- /.container-fluid -->\n</nav>";
+
+},{}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -212,8 +213,9 @@ var navbar2Controller = function navbar2Controller($rootScope, $interval) {
 exports.default = navbar2Controller;
 
 },{}],13:[function(require,module,exports){
-arguments[4][7][0].apply(exports,arguments)
-},{"dup":7}],14:[function(require,module,exports){
+module.exports = "<ul class=\"nav nav-pills\">\n  <li id=\"logoli\"><img id=\"logo\" src=\"./images/geocaching-200.png\"></li>\n  <li role=\"presentation\" ><a href=\"#\">Learn</a></li>\n  <li role=\"presentation\"><a href=\"#\">Play</a></li>\n  <li role=\"presentation\"><a href=\"#\">Community</a></li>\n  <li role=\"presentation\"><a href=\"#\">Shop</a></li>\n</ul>\n";
+
+},{}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
