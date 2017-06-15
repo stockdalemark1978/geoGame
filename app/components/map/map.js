@@ -6,3 +6,10 @@ let mapModule = angular.module('map', [])
 .component('map', mapComponent);
 
 export default mapModule;
+
+
+
+
+
+
+

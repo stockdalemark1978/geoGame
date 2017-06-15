@@ -1,4 +1,5 @@
 // 'use strict'
+require('dotenv').config()
 
 import appComponent from './app.component';
 import navbarComponent from './components/navbar/navbar.component';
