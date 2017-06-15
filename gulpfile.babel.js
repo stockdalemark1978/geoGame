@@ -8,6 +8,8 @@ import source from 'vinyl-source-stream';
 import autoprefixer from 'gulp-autoprefixer'
 import concat from 'gulp-concat';
 import sass from 'gulp-sass';
+import dotenv from 'gulp-dotenv';
+import rename from 'gulp-rename';
 
 const autoprefixerOptions = {
     browsers: [
@@ -83,4 +85,12 @@ gulp.task('connect', () => {
     connect.server();
 });
 
-gulp.task('default', ['connect', 'bundle', 'css']);
+//access env variables in .env file
+gulp.task("dotenv", () => {
+    return gulp.src(".env")
+    .pipe(dotenv())
+    .pipe(rename("env.json"))
+    .pipe(gulp.dest("dist"))
+})
+
+gulp.task('default', ['connect', 'bundle', 'css', 'dotenv']);

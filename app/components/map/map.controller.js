@@ -1,24 +1,38 @@
 import GoogleMapsLoader from 'google-maps';
+import dotenv from '../../../dist/env.json';
 
 class mapController {
     constructor($rootScope, $interval) {
         let ctrl = this;
+        GoogleMapsLoader.KEY = dotenv.API_KEY;
         ctrl.$rootScope = $rootScope;
         ctrl.title = "MarkMail";
-        GoogleMapsLoader.load(function(google){
-            let map = new google.maps.Map(document.getElementById('map'),{
-                center: {lat: -34.397, lng: 150.644},
+        GoogleMapsLoader.load(function (google) {
+            
+            let map = new google.maps.Map(document.getElementById('map'), {
+                center: {
+                    lat: -34.397,
+                    lng: 150.644
+                },
                 scrollwheel: false,
                 zoom: 8
             });
-            
-       
-  });
+
+
+        });
+
+        ctrl.$rootScope.mark = "hello poop";
+
+    console.log(ctrl.title);
 
     }
 
+    
 
 }
+
+
+
 
 export default mapController;
 
@@ -31,13 +45,13 @@ export default mapController;
 //   var map = new google.maps.Map(mapCanvas,mapOptions);
 //   var marker = new google.maps.Marker({
 //     position: myCenter,
-    
+
 //   });
 //   for (var i=0; i<=25; i++){
 //     var ranLat = Math.random()- 0.5;
 //     var ranLng = Math.random()- 0.5;
 //     var newCenter = new google.maps.LatLng(51.508742+ranLat,-0.120850+ranLng);
-    
+
 //     var newMarker = new google.maps.Marker({
 //     position: newCenter,
 //     customInfo: "Marker "+ i.toString(),
@@ -52,8 +66,8 @@ export default mapController;
 //     newMarker.setMap(map);
 //     }
 //   marker.setMap(map);
-  
 
 
-  
+
+
 // }

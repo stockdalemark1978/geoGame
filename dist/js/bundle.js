@@ -74,7 +74,7 @@ require('dotenv').config();
 
 angular.module('app', []).component('app', _app2.default).component('navbar', _navbar2.default).component('navbar2', _navbar4.default).component('map', _map2.default).component('results', _results2.default);
 
-},{"./app.component":1,"./components/map/map.component":5,"./components/navbar/navbar.component":8,"./components/navbar2/navbar2.component":11,"./components/results/results.component":14,"dotenv":18}],5:[function(require,module,exports){
+},{"./app.component":1,"./components/map/map.component":5,"./components/navbar/navbar.component":8,"./components/navbar2/navbar2.component":11,"./components/results/results.component":14,"dotenv":19}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -111,6 +111,10 @@ var _googleMaps = require('google-maps');
 
 var _googleMaps2 = _interopRequireDefault(_googleMaps);
 
+var _env = require('../../../dist/env.json');
+
+var _env2 = _interopRequireDefault(_env);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -119,15 +123,24 @@ var mapController = function mapController($rootScope, $interval) {
     _classCallCheck(this, mapController);
 
     var ctrl = this;
+    _googleMaps2.default.KEY = _env2.default.API_KEY;
     ctrl.$rootScope = $rootScope;
     ctrl.title = "MarkMail";
     _googleMaps2.default.load(function (google) {
+
         var map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: -34.397, lng: 150.644 },
+            center: {
+                lat: -34.397,
+                lng: 150.644
+            },
             scrollwheel: false,
             zoom: 8
         });
     });
+
+    ctrl.$rootScope.mark = "hello poop";
+
+    console.log(ctrl.title);
 };
 
 exports.default = mapController;
@@ -164,8 +177,8 @@ exports.default = mapController;
 
 // }
 
-},{"google-maps":19}],7:[function(require,module,exports){
-module.exports = "\n\n<div id=\"map\" style=\"width:100%;height:500px\"></div>\n<h1>{{$ctrl.title}}</h1>\n\n\n\n\n\n";
+},{"../../../dist/env.json":17,"google-maps":20}],7:[function(require,module,exports){
+module.exports = "\n\n<div id=\"map\" style=\"width:100%;height:500px\"></div>\n\n<h1>{{$ctrl.$rootScope.mark}}</h1>\n\n\n\n\n\n";
 
 },{}],8:[function(require,module,exports){
 'use strict';
@@ -309,11 +322,13 @@ var resultsController = function resultsController($rootScope, $interval) {
 exports.default = resultsController;
 
 },{}],16:[function(require,module,exports){
-module.exports = "<h1>Results</h1>\n<div class=\"table-responsive\">\n  <table class=\"table\">\n    <thead>\n      <tr>\n        <th>Geocache Name</th>\n        <th>Distance</th>\n        <th>Favorites</th>\n        <th>Size</th>\n        <th>Difficulty</th>\n        <th>Terrain</th>\n        <th>Last Found</th>\n      </tr>\n  </thead>\n    <tbody>\n      <tr ng-repeat=\"marker in markers\">\n        <td ng-repeat=\"\"></td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n\n\n";
+module.exports = "<h1>Results</h1>\n<div class=\"table-responsive\">\n  <table class=\"table\">\n    <thead>\n      <tr>\n        <th>Geocache Name</th>\n        <th>Distance</th>\n        <th>Favorites</th>\n        <th>Size</th>\n        <th>Difficulty</th>\n        <th>Terrain</th>\n        <th>Last Found</th>\n      </tr>\n  </thead>\n    <tbody>\n      <tr ng-repeat=\"marker in markers\">\n        <td ng-repeat=\"\"></td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n\n\n\n";
 
 },{}],17:[function(require,module,exports){
-
+module.exports={"API_KEY":"AIzaSyA_X69XSM3O9LC8VpZkI8Q9R0O5l2VclDk"}
 },{}],18:[function(require,module,exports){
+
+},{}],19:[function(require,module,exports){
 (function (process){
 'use strict'
 
@@ -391,7 +406,7 @@ module.exports.load = config
 module.exports.parse = parse
 
 }).call(this,require('_process'))
-},{"_process":20,"fs":17}],19:[function(require,module,exports){
+},{"_process":21,"fs":18}],20:[function(require,module,exports){
 (function(root, factory) {
 
 	if (root === null) {
@@ -612,7 +627,7 @@ module.exports.parse = parse
 
 });
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
