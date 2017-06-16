@@ -1,5 +1,6 @@
 import GoogleMapsLoader from 'google-maps';
 import dotenv from '../../../dist/env.json';
+
 class mapController {
     constructor($rootScope, $interval) {
         let ctrl = this;
@@ -32,7 +33,7 @@ class mapController {
             }
         });
         
-        ctrl.$rootScope.distances = "hello poop"
+        ctrl.$rootScope.distances = "hello Elton"
         
     console.log(ctrl.title);
     }
