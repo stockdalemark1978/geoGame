@@ -13,12 +13,20 @@
       </tr>
   </thead>
     <tbody>
-      <tr ng-repeat="marker in markers">
-        <td ng-repeat=""></td>
+      <tr ng-repeat="result in results">
+        <td ng-repeat="result in results">{{result.name}}</td>
+        <td ng-repeat="result in results">{{result.distance}}</td>
+        <td ng-repeat="result in results">{{result.favorites}}</td>
+        <td ng-repeat="result in results">{{result.size}}</td>
+        <td ng-repeat="result in results">{{result.difficulty}}</td>
+        <td ng-repeat="result in results">{{result.terrain}}</td>
+        <td ng-repeat="result in results">{{result.lastFound}}</td>      
       </tr>
     </tbody>
   </table>
 </div>
+
+<h1>{{$ctrl.$rootScope.distances}}</h1>
 
 
 

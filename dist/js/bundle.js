@@ -136,9 +136,23 @@ var mapController = function mapController($rootScope, $interval) {
             scrollwheel: false,
             zoom: 8
         });
+        ctrl.marker = new google.maps.Marker({
+            position: { lat: -34.397,
+                lng: 150.644 },
+            map: map
+        });
+        for (var i = 0; i <= 25; i++) {
+            ctrl.ranLat = Math.random() - 0.5;
+            ctrl.ranLng = Math.random() - 0.5;
+            ctrl.newmarker = new google.maps.Marker({
+                position: { lat: -34.397 + ctrl.ranLat,
+                    lng: 150.644 + ctrl.ranLng },
+                map: map
+            });
+        }
     });
 
-    ctrl.$rootScope.mark = "hello poop";
+    ctrl.$rootScope.distances = "hello poop";
 
     console.log(ctrl.title);
 };
@@ -146,18 +160,18 @@ var mapController = function mapController($rootScope, $interval) {
 exports.default = mapController;
 
 // function myMap() {
-//   var mapCanvas = document.getElementById("map");
-//   var myCenter = new google.maps.LatLng(51.508742,-0.120850);
-//   var mapOptions = {center: myCenter, zoom: 9};
-//   var map = new google.maps.Map(mapCanvas,mapOptions);
-//   var marker = new google.maps.Marker({
+//   ctrl.mapCanvas = document.getElementById("map");
+//   ctrl.myCenter = new google.maps.LatLng(51.508742,-0.120850);
+//   ctrl.mapOptions = {center: myCenter, zoom: 9};
+//   ctrl.map = new google.maps.Map(mapCanvas,mapOptions);
+//   ctrl.marker = new google.maps.Marker({
 //     position: myCenter,
 
 //   });
 //   for (var i=0; i<=25; i++){
-//     var ranLat = Math.random()- 0.5;
-//     var ranLng = Math.random()- 0.5;
-//     var newCenter = new google.maps.LatLng(51.508742+ranLat,-0.120850+ranLng);
+//     ctrl.ranLat = Math.random()- 0.5;
+//     ctrl.ranLng = Math.random()- 0.5;
+//     ctrl.newCenter = new google.maps.LatLng(51.508742+ranLat,-0.120850+ranLng);
 
 //     var newMarker = new google.maps.Marker({
 //     position: newCenter,
@@ -178,7 +192,7 @@ exports.default = mapController;
 // }
 
 },{"../../../dist/env.json":17,"google-maps":20}],7:[function(require,module,exports){
-module.exports = "\n\n<div id=\"map\" style=\"width:100%;height:500px\"></div>\n\n<h1>{{$ctrl.$rootScope.mark}}</h1>\n\n\n\n\n\n";
+module.exports = "\n\n<div id=\"map\" style=\"width:100%;height:500px\"></div>\n\n<h1>{{$ctrl.$rootScope.mark}}</h1>\n<h2>{{$ctrl.title}}</h2>\n\n\n\n\n\n";
 
 },{}],8:[function(require,module,exports){
 'use strict';
@@ -322,7 +336,7 @@ var resultsController = function resultsController($rootScope, $interval) {
 exports.default = resultsController;
 
 },{}],16:[function(require,module,exports){
-module.exports = "<h1>Results</h1>\n<div class=\"table-responsive\">\n  <table class=\"table\">\n    <thead>\n      <tr>\n        <th>Geocache Name</th>\n        <th>Distance</th>\n        <th>Favorites</th>\n        <th>Size</th>\n        <th>Difficulty</th>\n        <th>Terrain</th>\n        <th>Last Found</th>\n      </tr>\n  </thead>\n    <tbody>\n      <tr ng-repeat=\"marker in markers\">\n        <td ng-repeat=\"\"></td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n\n\n\n";
+module.exports = "<h1>Results</h1>\n<div class=\"table-responsive\">\n  <table class=\"table\">\n    <thead>\n      <tr>\n        <th>Geocache Name</th>\n        <th>Distance</th>\n        <th>Favorites</th>\n        <th>Size</th>\n        <th>Difficulty</th>\n        <th>Terrain</th>\n        <th>Last Found</th>\n      </tr>\n  </thead>\n    <tbody>\n      <tr ng-repeat=\"result in results\">\n        <td ng-repeat=\"result in results\">{{result.name}}</td>\n        <td ng-repeat=\"result in results\">{{result.distance}}</td>\n        <td ng-repeat=\"result in results\">{{result.favorites}}</td>\n        <td ng-repeat=\"result in results\">{{result.size}}</td>\n        <td ng-repeat=\"result in results\">{{result.difficulty}}</td>\n        <td ng-repeat=\"result in results\">{{result.terrain}}</td>\n        <td ng-repeat=\"result in results\">{{result.lastFound}}</td>      \n      </tr>\n    </tbody>\n  </table>\n</div>\n\n<h1>{{$ctrl.$rootScope.distances}}</h1>\n\n\n\n";
 
 },{}],17:[function(require,module,exports){
 module.exports={"API_KEY":"AIzaSyA_X69XSM3O9LC8VpZkI8Q9R0O5l2VclDk"}

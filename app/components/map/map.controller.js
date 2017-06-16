@@ -1,6 +1,5 @@
 import GoogleMapsLoader from 'google-maps';
 import dotenv from '../../../dist/env.json';
-
 class mapController {
     constructor($rootScope, $interval) {
         let ctrl = this;
@@ -17,40 +16,45 @@ class mapController {
                 scrollwheel: false,
                 zoom: 8
             });
-
-
+            ctrl.marker = new google.maps.Marker({
+            position: {lat: -34.397,
+                      lng: 150.644},
+            map: map
         });
-
-        ctrl.$rootScope.mark = "hello poop";
-
+            for(let i = 0; i<=25; i++){
+                ctrl.ranLat = Math.random()- 0.5;
+                ctrl.ranLng = Math.random()- 0.5;
+                ctrl.newmarker = new google.maps.Marker({
+                position: {lat: -34.397+ctrl.ranLat,
+                      lng: 150.644+ctrl.ranLng},
+                map: map
+                 });
+            }
+        });
+        
+        ctrl.$rootScope.distances = "hello poop"
+        
     console.log(ctrl.title);
-
     }
-
     
-
 }
-
-
-
-
 export default mapController;
 
 
 
 // function myMap() {
-//   var mapCanvas = document.getElementById("map");
-//   var myCenter = new google.maps.LatLng(51.508742,-0.120850);
-//   var mapOptions = {center: myCenter, zoom: 9};
-//   var map = new google.maps.Map(mapCanvas,mapOptions);
-//   var marker = new google.maps.Marker({
+//   ctrl.mapCanvas = document.getElementById("map");
+//   ctrl.myCenter = new google.maps.LatLng(51.508742,-0.120850);
+//   ctrl.mapOptions = {center: myCenter, zoom: 9};
+//   ctrl.map = new google.maps.Map(mapCanvas,mapOptions);
+//   ctrl.marker = new google.maps.Marker({
 //     position: myCenter,
 
 //   });
 //   for (var i=0; i<=25; i++){
-//     var ranLat = Math.random()- 0.5;
-//     var ranLng = Math.random()- 0.5;
-//     var newCenter = new google.maps.LatLng(51.508742+ranLat,-0.120850+ranLng);
+//     ctrl.ranLat = Math.random()- 0.5;
+//     ctrl.ranLng = Math.random()- 0.5;
+//     ctrl.newCenter = new google.maps.LatLng(51.508742+ranLat,-0.120850+ranLng);
 
 //     var newMarker = new google.maps.Marker({
 //     position: newCenter,
