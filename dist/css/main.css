@@ -1,3 +1,9 @@
+#search {
+  position: absolute;
+  left: 150px;
+  top: 325px;
+  z-index: +1; }
+
 .drop {
   padding: 0px;
   color: red; }
@@ -13,7 +19,7 @@ li {
   padding-bottom: 0px; }
 
 .navbar {
-  background-color: green;
+  background-color: #6b9f44;
   margin-bottom: 0px;
   border-radius: 0px;
   border: 0px; }
@@ -50,7 +56,6 @@ ul.nav.navbar-nav.navbar-right {
   vertical-align: middle;
   margin: 6px 0 0 0; }
 
-
 #nav2 li > a {
   position: relative;
   display: block;
@@ -58,12 +63,12 @@ ul.nav.navbar-nav.navbar-right {
 
 .nav-pills > li > a {
   border-radius: 0px;
-  color: green; }
+  color: #6b9f44; }
 
 .nav-pills > li > a:hover {
   border-radius: 0px;
   color: white;
-  background-color: green; }
+  background-color: #6b9f44; }
 
 #logo {
   width: 80%; }

@@ -13,20 +13,22 @@
       </tr>
   </thead>
     <tbody>
-      <tr ng-repeat="result in results">
-        <td ng-repeat="result in results">{{result.name}}</td>
-        <td ng-repeat="result in results">{{result.distance}}</td>
-        <td ng-repeat="result in results">{{result.favorites}}</td>
-        <td ng-repeat="result in results">{{result.size}}</td>
-        <td ng-repeat="result in results">{{result.difficulty}}</td>
-        <td ng-repeat="result in results">{{result.terrain}}</td>
-        <td ng-repeat="result in results">{{result.lastFound}}</td>      
-      </tr>
+      <tr ng-repeat="result in $ctrl.results">
+        <td>{{result.name}}</td>
+        <td>{{result.price}}</td>
+        <td>{{result.selected}}</td>
+        <td>{{result.terrain}}</td>
+        <td>{{result.lastFound}}</td>
+      </tr>    
+      
     </tbody>
   </table>
 </div>
+<!--<div ng-repeat="result in $ctrl.results">{{result.name}}</div>-->
 
-<h1>{{$ctrl.$rootScope.distances}}</h1>
+<!--<h1>{{$ctrl.results[1].name}}</h1>-->
+
+<!--<h1>{{$ctrl.$rootScope.distances}}</h1>-->
 
 
 

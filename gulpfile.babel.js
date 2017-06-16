@@ -60,10 +60,6 @@ gulp.task('bundle', () => {
 
     function bundle()  {
         b.bundle()
-        .on('error', function(err){
-            console.log(err.message);
-            this.emit('end');
-        })
         .pipe(source('bundle.js'))
         .pipe(gulp.dest('dist/js/'))
     }

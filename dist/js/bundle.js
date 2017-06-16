@@ -15,7 +15,11 @@ var _app4 = _interopRequireDefault(_app3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+<<<<<<< HEAD
 _app4.default.$inject = ['$rootScope', '$interval', '$timeout'];
+=======
+_app4.default.$inject = ['$rootScope', '$interval'];
+>>>>>>> b8069a71122e14a0d80d55a514943499bf81ce7c
 
 var appComponent = {
     template: _app2.default,
@@ -69,9 +73,18 @@ var _results2 = _interopRequireDefault(_results);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+<<<<<<< HEAD
 angular.module('app', []).component('app', _app2.default).component('navbar', _navbar2.default).component('navbar2', _navbar4.default).component('map', _map2.default).component('results', _results2.default); // 'use strict'
 
 },{"./app.component":1,"./components/map/map.component":5,"./components/navbar/navbar.component":8,"./components/navbar2/navbar2.component":11,"./components/results/results.component":14}],5:[function(require,module,exports){
+=======
+// 'use strict'
+require('dotenv').config();
+
+angular.module('app', []).component('app', _app2.default).component('navbar', _navbar2.default).component('navbar2', _navbar4.default).component('map', _map2.default).component('results', _results2.default);
+
+},{"./app.component":1,"./components/map/map.component":5,"./components/navbar/navbar.component":8,"./components/navbar2/navbar2.component":11,"./components/results/results.component":14,"dotenv":19}],5:[function(require,module,exports){
+>>>>>>> b8069a71122e14a0d80d55a514943499bf81ce7c
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -91,7 +104,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mapComponent = {
     bindings: {},
     template: _map2.default,
+<<<<<<< HEAD
     controller: ['$rootScope', '$interval', '$timeout', _map4.default],
+=======
+    controller: ['$rootScope', '$interval', _map4.default],
+>>>>>>> b8069a71122e14a0d80d55a514943499bf81ce7c
     controllerAs: '$ctrl'
 };
 
@@ -116,12 +133,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+<<<<<<< HEAD
 var mapController = function mapController($rootScope, $interval, $timeout) {
+=======
+var mapController = function mapController($rootScope, $interval) {
+>>>>>>> b8069a71122e14a0d80d55a514943499bf81ce7c
     _classCallCheck(this, mapController);
 
     var ctrl = this;
     _googleMaps2.default.KEY = _env2.default.API_KEY;
     ctrl.$rootScope = $rootScope;
+<<<<<<< HEAD
     ctrl.titles = [];
     ctrl.distances = [];
     ctrl.favorites = [];
@@ -131,6 +153,9 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
 
     ctrl.$rootScope.results = [];
 
+=======
+    ctrl.title = "MarkMail";
+>>>>>>> b8069a71122e14a0d80d55a514943499bf81ce7c
     _googleMaps2.default.load(function (google) {
 
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -146,6 +171,7 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
                 lng: 150.644 },
             map: map
         });
+<<<<<<< HEAD
         var rad = function rad(x) {
             return x * Math.PI / 180;
         };
@@ -160,12 +186,15 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
             return d; // returns the distance in meter
         };
 
+=======
+>>>>>>> b8069a71122e14a0d80d55a514943499bf81ce7c
         for (var i = 0; i <= 25; i++) {
             ctrl.ranLat = Math.random() - 0.5;
             ctrl.ranLng = Math.random() - 0.5;
             ctrl.newmarker = new google.maps.Marker({
                 position: { lat: -34.397 + ctrl.ranLat,
                     lng: 150.644 + ctrl.ranLng },
+<<<<<<< HEAD
                 map: map,
                 title: "Marker " + i.toString()
             });
@@ -215,12 +244,59 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
     }, 500);
 
     ctrl.$rootScope.distances = "hello !";
+=======
+                map: map
+            });
+        }
+    });
+
+    ctrl.$rootScope.distances = "hello Elton";
+
+    console.log(ctrl.title);
+>>>>>>> b8069a71122e14a0d80d55a514943499bf81ce7c
 };
 
 exports.default = mapController;
 
+<<<<<<< HEAD
 },{"../../../dist/env.json":17,"google-maps":18}],7:[function(require,module,exports){
 module.exports = "\n\n<div id=\"map\" style=\"width:100%;height:500px\"></div>\n\n<h1>{{$ctrl.$rootScope.mark}}</h1>\n<h2>{{$ctrl.title}}</h2>\n\n\n\n\n\n";
+=======
+// function myMap() {
+//   ctrl.mapCanvas = document.getElementById("map");
+//   ctrl.myCenter = new google.maps.LatLng(51.508742,-0.120850);
+//   ctrl.mapOptions = {center: myCenter, zoom: 9};
+//   ctrl.map = new google.maps.Map(mapCanvas,mapOptions);
+//   ctrl.marker = new google.maps.Marker({
+//     position: myCenter,
+
+//   });
+//   for (var i=0; i<=25; i++){
+//     ctrl.ranLat = Math.random()- 0.5;
+//     ctrl.ranLng = Math.random()- 0.5;
+//     ctrl.newCenter = new google.maps.LatLng(51.508742+ranLat,-0.120850+ranLng);
+
+//     var newMarker = new google.maps.Marker({
+//     position: newCenter,
+//     customInfo: "Marker "+ i.toString(),
+//     customInfo2: "We like Oreos",
+//     customInfo3: "Coffee is good"
+//     });
+//     google.maps.event.addListener(newMarker, 'click', function() {
+//     alert(this.customInfo);
+//     alert(this.customInfo2);
+//     alert(this.customInfo3);
+//     });
+//     newMarker.setMap(map);
+//     }
+//   marker.setMap(map);
+
+
+// }
+
+},{"../../../dist/env.json":17,"google-maps":20}],7:[function(require,module,exports){
+module.exports = "<div class=\"container\" id=\"search\">\n\t<div class=\"row\">\n        <div class=\"col-sm-6 col-sm-offset-3\">\n            <div id=\"imaginary_container\"> \n                <div class=\"input-group stylish-input-group\">\n                    <input type=\"text\" class=\"form-control\"  placeholder=\"Search\" >\n                    <span class=\"input-group-addon\">\n                        <button type=\"submit\">\n                            <span class=\"glyphicon glyphicon-search\"></span>\n                        </button>  \n                    </span>\n                </div>\n            </div>\n        </div>\n\t</div>\n</div>\n\n\n\n<div id=\"map\" style=\"width:100%;height:500px\"></div>\n\n<!--<h1>{{$ctrl.$rootScope.mark}}</h1>\n<h2>{{$ctrl.title}}</h2>-->\n\n\n\n\n\n";
+>>>>>>> b8069a71122e14a0d80d55a514943499bf81ce7c
 
 },{}],8:[function(require,module,exports){
 'use strict';
@@ -316,7 +392,11 @@ var navbar2Controller = function navbar2Controller($rootScope, $interval) {
 exports.default = navbar2Controller;
 
 },{}],13:[function(require,module,exports){
+<<<<<<< HEAD
 module.exports = "<ul class=\"nav nav-pills\">\n  <li id=\"logoli\"><img id=\"logo\" src=\"./images/geocaching-200.png\"></li>\n  <li role=\"presentation\" ><a href=\"#\">Learns</a></li>\n  <li role=\"presentation\"><a href=\"#\">Play</a></li>\n  <li role=\"presentation\"><a href=\"#\">Community</a></li>\n  <li role=\"presentation\"><a href=\"#\">Shop</a></li>\n</ul>\n";
+=======
+module.exports = "<ul class=\"nav nav-pills\">\n  <li id=\"logoli\"><img id=\"logo\" src=\"./images/geocaching-200.png\"></li>\n  <li role=\"presentation\" ><a href=\"#\">Learn</a></li>\n  <li role=\"presentation\"><a href=\"#\">Play</a></li>\n  <li role=\"presentation\"><a href=\"#\">Community</a></li>\n  <li role=\"presentation\"><a href=\"#\">Shop</a></li>\n</ul>\n";
+>>>>>>> b8069a71122e14a0d80d55a514943499bf81ce7c
 
 },{}],14:[function(require,module,exports){
 'use strict';
@@ -359,16 +439,128 @@ var resultsController = function resultsController($rootScope, $interval) {
     var ctrl = this;
     ctrl.$rootScope = $rootScope;
     ctrl.title = "MarkMail";
+<<<<<<< HEAD
+=======
+
+    ctrl.results = [{
+        name: "Web Development",
+        price: 30,
+        selected: false
+    }, {
+        name: "Design",
+        price: 40,
+        selected: false
+    }, {
+        name: "Integration",
+        price: 35,
+        selected: false
+    }, {
+        name: "Training",
+        price: 20,
+        selected: false
+    }, {
+        name: "Oreos",
+        price: 1000,
+        selected: false
+    }];
+>>>>>>> b8069a71122e14a0d80d55a514943499bf81ce7c
 };
 
 exports.default = resultsController;
 
 },{}],16:[function(require,module,exports){
+<<<<<<< HEAD
 module.exports = "<h1>Results</h1>\n<div class=\"table-responsive\">\n  <table class=\"table\">\n    <thead>\n      <tr>\n        <th>Geocache Name</th>\n        <th>Distance</th>\n        <th>Favorites</th>\n        <th>Size</th>\n        <th>Difficulty</th>\n        <th>Terrain</th>\n        <th>Last Found</th>\n      </tr>\n  </thead>\n    <tbody>\n      <tr ng-repeat=\"result in results\">\n        <td ng-repeat=\"result in results\">{{result.name}}</td>\n        <td ng-repeat=\"result in results\">{{result.distance}}</td>\n        <td ng-repeat=\"result in results\">{{result.favorites}}</td>\n        <td ng-repeat=\"result in results\">{{result.size}}</td>\n        <td ng-repeat=\"result in results\">{{result.difficulty}}</td>\n        <td ng-repeat=\"result in results\">{{result.terrain}}</td>\n        <td ng-repeat=\"result in results\">{{result.lastFound}}</td>      \n      </tr>\n    </tbody>\n  </table>\n</div>\n\n<h1>{{$ctrl.$rootScope.distances}}</h1>\n\n\n\n";
+=======
+module.exports = "<h1>Results</h1>\n<div class=\"table-responsive\">\n  <table class=\"table\">\n    <thead>\n      <tr>\n        <th>Geocache Name</th>\n        <th>Distance</th>\n        <th>Favorites</th>\n        <th>Size</th>\n        <th>Difficulty</th>\n        <th>Terrain</th>\n        <th>Last Found</th>\n      </tr>\n  </thead>\n    <tbody>\n      <tr ng-repeat=\"result in $ctrl.results\">\n        <td>{{result.name}}</td>\n        <td>{{result.price}}</td>\n        <td>{{result.selected}}</td>\n        <td>{{result.terrain}}</td>\n        <td>{{result.lastFound}}</td>\n      </tr>    \n      \n    </tbody>\n  </table>\n</div>\n<!--<div ng-repeat=\"result in $ctrl.results\">{{result.name}}</div>-->\n\n<!--<h1>{{$ctrl.results[1].name}}</h1>-->\n\n<!--<h1>{{$ctrl.$rootScope.distances}}</h1>-->\n\n\n\n";
+>>>>>>> b8069a71122e14a0d80d55a514943499bf81ce7c
 
 },{}],17:[function(require,module,exports){
 module.exports={"API_KEY":"AIzaSyA_X69XSM3O9LC8VpZkI8Q9R0O5l2VclDk"}
 },{}],18:[function(require,module,exports){
+<<<<<<< HEAD
+=======
+
+},{}],19:[function(require,module,exports){
+(function (process){
+'use strict'
+
+var fs = require('fs')
+
+/*
+ * Parses a string or buffer into an object
+ * @param {String|Buffer} src - source to be parsed
+ * @returns {Object}
+*/
+function parse (src) {
+  var obj = {}
+
+  // convert Buffers before splitting into lines and processing
+  src.toString().split('\n').forEach(function (line) {
+    // matching "KEY' and 'VAL' in 'KEY=VAL'
+    var keyValueArr = line.match(/^\s*([\w\.\-]+)\s*=\s*(.*)?\s*$/)
+    // matched?
+    if (keyValueArr != null) {
+      var key = keyValueArr[1]
+
+      // default undefined or missing values to empty string
+      var value = keyValueArr[2] ? keyValueArr[2] : ''
+
+      // expand newlines in quoted values
+      var len = value ? value.length : 0
+      if (len > 0 && value.charAt(0) === '"' && value.charAt(len - 1) === '"') {
+        value = value.replace(/\\n/gm, '\n')
+      }
+
+      // remove any surrounding quotes and extra spaces
+      value = value.replace(/(^['"]|['"]$)/g, '').trim()
+
+      obj[key] = value
+    }
+  })
+
+  return obj
+}
+
+/*
+ * Main entry point into dotenv. Allows configuration before loading .env
+ * @param {Object} options - valid options: path ('.env'), encoding ('utf8')
+ * @returns {Boolean}
+*/
+function config (options) {
+  var path = '.env'
+  var encoding = 'utf8'
+
+  if (options) {
+    if (options.path) {
+      path = options.path
+    }
+    if (options.encoding) {
+      encoding = options.encoding
+    }
+  }
+
+  try {
+    // specifying an encoding returns a string instead of a buffer
+    var parsedObj = parse(fs.readFileSync(path, { encoding: encoding }))
+
+    Object.keys(parsedObj).forEach(function (key) {
+      process.env[key] = process.env[key] || parsedObj[key]
+    })
+
+    return { parsed: parsedObj }
+  } catch (e) {
+    return { error: e }
+  }
+}
+
+module.exports.config = config
+module.exports.load = config
+module.exports.parse = parse
+
+}).call(this,require('_process'))
+},{"_process":21,"fs":18}],20:[function(require,module,exports){
+>>>>>>> b8069a71122e14a0d80d55a514943499bf81ce7c
 (function(root, factory) {
 
 	if (root === null) {
@@ -589,4 +781,193 @@ module.exports={"API_KEY":"AIzaSyA_X69XSM3O9LC8VpZkI8Q9R0O5l2VclDk"}
 
 });
 
+<<<<<<< HEAD
+=======
+},{}],21:[function(require,module,exports){
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+>>>>>>> b8069a71122e14a0d80d55a514943499bf81ce7c
 },{}]},{},[4]);
