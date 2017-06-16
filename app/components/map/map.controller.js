@@ -2,13 +2,20 @@ import GoogleMapsLoader from 'google-maps';
 import dotenv from '../../../dist/env.json';
 
 class mapController {
-    constructor($rootScope, $interval) {
+
+    constructor($rootScope, $interval, $timeout) {
         let ctrl = this;
         GoogleMapsLoader.KEY = dotenv.API_KEY;
         ctrl.$rootScope = $rootScope;
-        ctrl.title = "MarkMail";
+        ctrl.titles = [];
         ctrl.distances = [];
-        
+        ctrl.favorites = [];
+        ctrl.mSize = [];
+        ctrl.difficulty = [];
+        ctrl.terrain = [];
+
+        ctrl.$rootScope.results = [];
+
         GoogleMapsLoader.load(function (google) {
             
             let map = new google.maps.Map(document.getElementById('map'), {
@@ -44,19 +51,62 @@ class mapController {
                 ctrl.ranLat = Math.random()- 0.5;
                 ctrl.ranLng = Math.random()- 0.5;
                 ctrl.newmarker = new google.maps.Marker({
-                position: {lat: -34.397+ctrl.ranLat,
-                lng: 150.644+ctrl.ranLng},
-                map: map,
-                title: "Marker " + i.toString()
+                    position: {lat: -34.397+ctrl.ranLat,
+                    lng: 150.644+ctrl.ranLng},
+                    map: map,
+                    title: "Marker " + i.toString()
                 });
                 google.maps.event.addListener(ctrl.newmarker, 'click', function() {
-                 alert(this.title);
-            });    
-                let y = getDistance(ctrl.newmarker.position, ctrl.marker.position);
-                ctrl.distances.push(y);  
+                     alert(this.title);
+                });    
+                ctrl.titles.push(ctrl.newmarker.title);
+
+                let d = Math.round(getDistance(ctrl.newmarker.position, ctrl.marker.position));
+                ctrl.distances.push(d);
+
+                ctrl.ranFav = Math.floor(Math.random() * 100);  
+                ctrl.favorites.push(ctrl.ranFav);
+
+                ctrl.size = ["XS", "S", "M", "L", "XL"];
+                ctrl.sizeSelect = Math.floor(Math.random() * 5);
+                ctrl.s = ctrl.size[ctrl.sizeSelect];
+                ctrl.mSize.push(ctrl.s);
+
+                ctrl.hardness = Math.floor(Math.random() * 10);
+                ctrl.difficulty.push(ctrl.hardness);
+
+                ctrl.hill = Math.floor(Math.random() * 10);
+                ctrl.terrain.push(ctrl.hill);
+
             }  
         });
-        console.log(ctrl.distances);
+        
+        // for (var j = 0; j<=25; j++){
+        //     ctrl.$rootScope.results.push({
+        //         title: ctrl.titles[j];
+        //         distance: ctrl.distances[j];
+        //     });
+        //     }
+
+        $timeout(function() {
+            for(let j=0; j<=25; j++){
+            ctrl.$rootScope.results.push(
+                {
+                    title: ctrl.titles[j],
+                    distance: ctrl.distances[j],
+                    favorites: ctrl.favorites[j],
+                    size: ctrl.mSize[j],
+                    difficulty: ctrl.difficulty[j],
+                    terrain: ctrl.terrain[j]
+                }
+            );
+        }
+            console.log(ctrl.$rootScope.results);
+            
+        },500)
+        
+        
+
         ctrl.$rootScope.distances = "hello !"
         
     }

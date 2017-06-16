@@ -15,7 +15,7 @@ var _app4 = _interopRequireDefault(_app3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_app4.default.$inject = ['$rootScope', '$interval'];
+_app4.default.$inject = ['$rootScope', '$interval', '$timeout'];
 
 var appComponent = {
     template: _app2.default,
@@ -91,7 +91,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mapComponent = {
     bindings: {},
     template: _map2.default,
-    controller: ['$rootScope', '$interval', _map4.default],
+    controller: ['$rootScope', '$interval', '$timeout', _map4.default],
     controllerAs: '$ctrl'
 };
 
@@ -116,14 +116,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var mapController = function mapController($rootScope, $interval) {
+var mapController = function mapController($rootScope, $interval, $timeout) {
     _classCallCheck(this, mapController);
 
     var ctrl = this;
     _googleMaps2.default.KEY = _env2.default.API_KEY;
     ctrl.$rootScope = $rootScope;
-    ctrl.title = "MarkMail";
+    ctrl.titles = [];
     ctrl.distances = [];
+    ctrl.favorites = [];
+    ctrl.mSize = [];
+    ctrl.difficulty = [];
+    ctrl.terrain = [];
+
+    ctrl.$rootScope.results = [];
 
     _googleMaps2.default.load(function (google) {
 
@@ -166,11 +172,48 @@ var mapController = function mapController($rootScope, $interval) {
             google.maps.event.addListener(ctrl.newmarker, 'click', function () {
                 alert(this.title);
             });
-            var y = getDistance(ctrl.newmarker.position, ctrl.marker.position);
-            ctrl.distances.push(y);
+            ctrl.titles.push(ctrl.newmarker.title);
+
+            var d = Math.round(getDistance(ctrl.newmarker.position, ctrl.marker.position));
+            ctrl.distances.push(d);
+
+            ctrl.ranFav = Math.floor(Math.random() * 100);
+            ctrl.favorites.push(ctrl.ranFav);
+
+            ctrl.size = ["XS", "S", "M", "L", "XL"];
+            ctrl.sizeSelect = Math.floor(Math.random() * 5);
+            ctrl.s = ctrl.size[ctrl.sizeSelect];
+            ctrl.mSize.push(ctrl.s);
+
+            ctrl.hardness = Math.floor(Math.random() * 10);
+            ctrl.difficulty.push(ctrl.hardness);
+
+            ctrl.hill = Math.floor(Math.random() * 10);
+            ctrl.terrain.push(ctrl.hill);
         }
     });
-    console.log(ctrl.distances);
+
+    // for (var j = 0; j<=25; j++){
+    //     ctrl.$rootScope.results.push({
+    //         title: ctrl.titles[j];
+    //         distance: ctrl.distances[j];
+    //     });
+    //     }
+
+    $timeout(function () {
+        for (var j = 0; j <= 25; j++) {
+            ctrl.$rootScope.results.push({
+                title: ctrl.titles[j],
+                distance: ctrl.distances[j],
+                favorites: ctrl.favorites[j],
+                size: ctrl.mSize[j],
+                difficulty: ctrl.difficulty[j],
+                terrain: ctrl.terrain[j]
+            });
+        }
+        console.log(ctrl.$rootScope.results);
+    }, 500);
+
     ctrl.$rootScope.distances = "hello !";
 };
 
