@@ -220,7 +220,7 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
 exports.default = mapController;
 
 },{"../../../dist/env.json":17,"google-maps":18}],7:[function(require,module,exports){
-module.exports = "<div class=\"container\" id=\"search\">\n\t<div class=\"row\">\n        <div class=\"col-sm-6 col-sm-offset-3\">\n            <div id=\"imaginary_container\"> \n                <div class=\"input-group stylish-input-group\">\n                    <input type=\"text\" class=\"form-control\"  placeholder=\"Search\" >\n                    <span class=\"input-group-addon\">\n                        <button type=\"submit\">\n                            <span class=\"glyphicon glyphicon-search\"></span>\n                        </button>  \n                    </span>\n                </div>\n            </div>\n        </div>\n\t</div>\n</div>\n\n\n\n<div id=\"map\" style=\"width:100%;height:500px\"></div>\n\n<!--<h1>{{$ctrl.$rootScope.mark}}</h1>\n<h2>{{$ctrl.title}}</h2>-->\n\n\n\n\n\n";
+module.exports = "<div class=\"container\" id=\"search\">\n\t<div class=\"row\">\n        <div class=\"col-sm-6 col-sm-offset-3\">\n            <div id=\"imaginary_container\"> \n                <div class=\"input-group stylish-input-group\">\n                    <input id=\"pac-input\" type=\"text\" class=\"form-control\"  placeholder=\"Search\" >\n                    <span class=\"input-group-addon\">\n                        <button type=\"submit\">\n                            <span class=\"glyphicon glyphicon-search\"></span>\n                        </button>  \n                    </span>\n                </div>\n            </div>\n        </div>\n\t</div>\n</div>\n\n\n\n<div id=\"map\" style=\"width:100%;height:500px\"></div>\n\n<!--<h1>{{$ctrl.$rootScope.mark}}</h1>\n<h2>{{$ctrl.title}}</h2>-->\n\n\n\n\n\n";
 
 },{}],8:[function(require,module,exports){
 'use strict';
@@ -316,7 +316,7 @@ var navbar2Controller = function navbar2Controller($rootScope, $interval) {
 exports.default = navbar2Controller;
 
 },{}],13:[function(require,module,exports){
-module.exports = "<ul class=\"nav nav-pills\">\n  <li id=\"logoli\"><img id=\"logo\" src=\"./images/geocaching-200.png\"></li>\n  <li role=\"presentation\" ><a href=\"#\">Learn</a></li>\n  <li role=\"presentation\"><a href=\"#\">Play</a></li>\n  <li role=\"presentation\"><a href=\"#\">Community</a></li>\n  <li role=\"presentation\"><a href=\"#\">Shop</a></li>\n</ul>\n";
+module.exports = "<ul class=\"nav nav-pills\">\n  <li id=\"logoli\"><img id=\"logo\" src=\"./images/GeoHunt logo.png\"></li>\n  <li role=\"presentation\" ><a href=\"#\">Learn</a></li>\n  <li role=\"presentation\"><a href=\"#\">Play</a></li>\n  <li role=\"presentation\"><a href=\"#\">Community</a></li>\n  <li role=\"presentation\"><a href=\"#\">Shop</a></li>\n</ul>\n";
 
 },{}],14:[function(require,module,exports){
 'use strict';

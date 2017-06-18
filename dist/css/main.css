@@ -71,7 +71,8 @@ ul.nav.navbar-nav.navbar-right {
   background-color: #6b9f44; }
 
 #logo {
-  width: 80%; }
+  width: 80%;
+  padding-top: 5px; }
 
 #logoli {
   width: 200px; }

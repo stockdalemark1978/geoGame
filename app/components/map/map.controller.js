@@ -16,6 +16,7 @@ class mapController {
 
         ctrl.$rootScope.results = [];
 
+
         GoogleMapsLoader.load(function (google) {
             
             let map = new google.maps.Map(document.getElementById('map'), {
