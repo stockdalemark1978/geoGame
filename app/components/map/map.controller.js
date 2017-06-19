@@ -43,7 +43,7 @@ class mapController {
             Math.cos(rad(p1.lat())) * Math.cos(rad(p2.lat())) *
             Math.sin(dLong / 2) * Math.sin(dLong / 2);
             var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            var d = R * c;
+            var d = R * c * 0.000621371;
             return d; // returns the distance in meter
             };
 
@@ -61,7 +61,7 @@ class mapController {
                 });    
                 ctrl.titles.push(ctrl.newmarker.title);
 
-                let d = Math.round(getDistance(ctrl.newmarker.position, ctrl.marker.position));
+                let d = (Math.round(getDistance(ctrl.newmarker.position, ctrl.marker.position)*10)/10);
                 ctrl.distances.push(d);
 
                 ctrl.ranFav = Math.floor(Math.random() * 100);  
@@ -72,10 +72,10 @@ class mapController {
                 ctrl.s = ctrl.size[ctrl.sizeSelect];
                 ctrl.mSize.push(ctrl.s);
 
-                ctrl.hardness = Math.floor(Math.random() * 10);
+                ctrl.hardness = ((Math.round(Math.random() * 100))/10).toFixed(1);
                 ctrl.difficulty.push(ctrl.hardness);
 
-                ctrl.hill = Math.floor(Math.random() * 10);
+                ctrl.hill = ((Math.round(Math.random() * 100))/10).toFixed(1);
                 ctrl.terrain.push(ctrl.hill);
 
             }  

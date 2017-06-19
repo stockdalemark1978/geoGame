@@ -9,12 +9,12 @@
         <th>Size</th>
         <th>Difficulty</th>
         <th>Terrain</th>
-      </tr>
+      </tr> 
   </thead>
     <tbody>
-       <tr ng-repeat="result in $ctrl.$rootScope.results">
+       <tr ng-repeat="result in $ctrl.$rootScope.results | orderBy:'distance'">
         <td>{{result.title}}</td>
-        <td>{{result.distance}}</td>
+        <td>{{result.distance}} mi</td>
         <td>{{result.favorites}}</td>
         <td>{{result.size}}</td>
         <td>{{result.difficulty}}</td>

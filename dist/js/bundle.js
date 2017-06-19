@@ -156,7 +156,7 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
             var dLong = rad(p2.lng() - p1.lng());
             var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(rad(p1.lat())) * Math.cos(rad(p2.lat())) * Math.sin(dLong / 2) * Math.sin(dLong / 2);
             var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            var d = R * c;
+            var d = R * c * 0.000621371;
             return d; // returns the distance in meter
         };
 
@@ -174,7 +174,7 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
             });
             ctrl.titles.push(ctrl.newmarker.title);
 
-            var d = Math.round(getDistance(ctrl.newmarker.position, ctrl.marker.position));
+            var d = Math.round(getDistance(ctrl.newmarker.position, ctrl.marker.position) * 10) / 10;
             ctrl.distances.push(d);
 
             ctrl.ranFav = Math.floor(Math.random() * 100);
@@ -185,10 +185,10 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
             ctrl.s = ctrl.size[ctrl.sizeSelect];
             ctrl.mSize.push(ctrl.s);
 
-            ctrl.hardness = Math.floor(Math.random() * 10);
+            ctrl.hardness = (Math.round(Math.random() * 100) / 10).toFixed(1);
             ctrl.difficulty.push(ctrl.hardness);
 
-            ctrl.hill = Math.floor(Math.random() * 10);
+            ctrl.hill = (Math.round(Math.random() * 100) / 10).toFixed(1);
             ctrl.terrain.push(ctrl.hill);
         }
     });
@@ -386,10 +386,10 @@ var resultsController = function resultsController($rootScope, $interval) {
 exports.default = resultsController;
 
 },{}],16:[function(require,module,exports){
-module.exports = "<h1>Results</h1>\n<div class=\"table-responsive\">\n  <table class=\"table\">\n    <thead>\n      <tr>\n        <th>Geocache Name</th>\n        <th>Distance</th>\n        <th>Favorites</th>\n        <th>Size</th>\n        <th>Difficulty</th>\n        <th>Terrain</th>\n      </tr>\n  </thead>\n    <tbody>\n       <tr ng-repeat=\"result in $ctrl.$rootScope.results\">\n        <td>{{result.title}}</td>\n        <td>{{result.distance}}</td>\n        <td>{{result.favorites}}</td>\n        <td>{{result.size}}</td>\n        <td>{{result.difficulty}}</td>\n        <td>{{result.terrain}}</td>\n      </tr>   \n\n\n      <!--<tr ng-repeat=\"result in $ctrl.results\">\n        <td>{{result.name}}</td>\n        <td>{{result.price}}</td>\n        <td>{{result.selected}}</td>\n        <td>{{result.terrain}}</td>\n        <td>{{result.lastFound}}</td>\n      </tr>    -->\n      \n    </tbody>\n  </table>\n</div>\n<!--<div ng-repeat=\"result in $ctrl.results\">{{result.name}}</div>-->\n\n<!--<h1>{{$ctrl.results[1].name}}</h1>-->\n\n<!--<h1>{{$ctrl.$rootScope.distances}}</h1>-->\n\n\n\n";
+module.exports = "<h1>Results</h1>\n<div class=\"table-responsive\">\n  <table class=\"table\">\n    <thead>\n      <tr>\n        <th>Geocache Name</th>\n        <th>Distance</th>\n        <th>Favorites</th>\n        <th>Size</th>\n        <th>Difficulty</th>\n        <th>Terrain</th>\n      </tr> \n  </thead>\n    <tbody>\n       <tr ng-repeat=\"result in $ctrl.$rootScope.results | orderBy:'distance'\">\n        <td>{{result.title}}</td>\n        <td>{{result.distance}} mi</td>\n        <td>{{result.favorites}}</td>\n        <td>{{result.size}}</td>\n        <td>{{result.difficulty}}</td>\n        <td>{{result.terrain}}</td>\n      </tr>   \n\n\n      <!--<tr ng-repeat=\"result in $ctrl.results\">\n        <td>{{result.name}}</td>\n        <td>{{result.price}}</td>\n        <td>{{result.selected}}</td>\n        <td>{{result.terrain}}</td>\n        <td>{{result.lastFound}}</td>\n      </tr>    -->\n      \n    </tbody>\n  </table>\n</div>\n<!--<div ng-repeat=\"result in $ctrl.results\">{{result.name}}</div>-->\n\n<!--<h1>{{$ctrl.results[1].name}}</h1>-->\n\n<!--<h1>{{$ctrl.$rootScope.distances}}</h1>-->\n\n\n\n";
 
 },{}],17:[function(require,module,exports){
-module.exports={"API_KEY":"AIzaSyA_X69XSM3O9LC8VpZkI8Q9R0O5l2VclDk"}
+module.exports={"API_KEY":"AIzaSyCBmZfM9wovJA8wBB6OyvZO8KolR7gB3PA"}
 },{}],18:[function(require,module,exports){
 (function(root, factory) {
 
