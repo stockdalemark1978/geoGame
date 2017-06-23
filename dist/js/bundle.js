@@ -203,18 +203,15 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
     $timeout(function () {
         for (var j = 0; j <= 25; j++) {
             ctrl.$rootScope.results.push({
-                title: ctrl.titles[j],
-                distance: ctrl.distances[j],
-                favorites: ctrl.favorites[j],
-                size: ctrl.mSize[j],
-                difficulty: ctrl.difficulty[j],
-                terrain: ctrl.terrain[j]
+                a: ctrl.titles[j],
+                b: ctrl.distances[j],
+                c: ctrl.favorites[j],
+                d: ctrl.mSize[j],
+                e: ctrl.difficulty[j],
+                f: ctrl.terrain[j]
             });
         }
-        console.log(ctrl.$rootScope.results);
     }, 500);
-
-    ctrl.$rootScope.distances = "hello !";
 };
 
 exports.default = mapController;
@@ -358,35 +355,44 @@ var resultsController = function resultsController($rootScope, $interval) {
 
     var ctrl = this;
     ctrl.$rootScope = $rootScope;
-    ctrl.title = "MarkMail";
 
-    ctrl.results = [{
-        name: "Web Development",
-        price: 30,
-        selected: false
-    }, {
-        name: "Design",
-        price: 40,
-        selected: false
-    }, {
-        name: "Integration",
-        price: 35,
-        selected: false
-    }, {
-        name: "Training",
-        price: 20,
-        selected: false
-    }, {
-        name: "Oreos",
-        price: 1000,
-        selected: false
-    }];
+    ctrl.$rootScope.headers = {
+        a: "Geocache Name",
+        b: "Distance",
+        c: "Favorites",
+        d: "Size",
+        e: "Difficulty",
+        f: "Terrain"
+    };
+
+    ctrl.sort = {
+        column: 'b',
+        descending: false
+    };
+
+    ctrl.selectedCls = function (column) {
+        return column == ctrl.sort.column;
+    };
+
+    ctrl.changeSorting = function (column) {
+        var sort = ctrl.sort;
+        if (sort.column == column) {
+            sort.descending = !sort.descending;
+            if (sort.descending == true) {
+                sort.column = "-" + sort.column;
+                console.log(sort.column);
+            }
+        } else {
+            sort.column = column;
+            sort.descending = false;
+        }
+    };
 };
 
 exports.default = resultsController;
 
 },{}],16:[function(require,module,exports){
-module.exports = "<h1>Results</h1>\n<div class=\"table-responsive\">\n  <table class=\"table\">\n    <thead>\n      <tr>\n        <th>Geocache Name</th>\n        <th>Distance</th>\n        <th>Favorites</th>\n        <th>Size</th>\n        <th>Difficulty</th>\n        <th>Terrain</th>\n      </tr> \n  </thead>\n    <tbody>\n       <tr ng-repeat=\"result in $ctrl.$rootScope.results | orderBy:'distance'\">\n        <td>{{result.title}}</td>\n        <td>{{result.distance}} mi</td>\n        <td>{{result.favorites}}</td>\n        <td>{{result.size}}</td>\n        <td>{{result.difficulty}}</td>\n        <td>{{result.terrain}}</td>\n      </tr>   \n\n\n      <!--<tr ng-repeat=\"result in $ctrl.results\">\n        <td>{{result.name}}</td>\n        <td>{{result.price}}</td>\n        <td>{{result.selected}}</td>\n        <td>{{result.terrain}}</td>\n        <td>{{result.lastFound}}</td>\n      </tr>    -->\n      \n    </tbody>\n  </table>\n</div>\n<!--<div ng-repeat=\"result in $ctrl.results\">{{result.name}}</div>-->\n\n<!--<h1>{{$ctrl.results[1].name}}</h1>-->\n\n<!--<h1>{{$ctrl.$rootScope.distances}}</h1>-->\n\n\n\n";
+module.exports = "<h1>Results</h1>\n<div class=\"table-responsive\">\n  <table class=\"table\">\n    <thead>\n      <tr>\n        <th ng:repeat=\"(i,th) in $ctrl.$rootScope.headers\" ng:class=\"$ctrl.selectedCls(i)\" ng:click=\"$ctrl.changeSorting(i)\" ng:click=\"$ctrl.selectedCls(i)\">{{th}}</th>\n      </tr> \n  </thead>\n    <tbody>\n       <tr ng:repeat=\"result in $ctrl.$rootScope.results | orderBy: $ctrl.sort.column\">\n        <td>{{result.a}}</td>\n        <td>{{result.b}} mi</td>\n        <td>{{result.c}}</td>\n        <td>{{result.d}}</td>\n        <td>{{result.e}}</td>\n        <td>{{result.f}}</td>\n      </tr>   \n    </tbody>\n  </table>\n</div>\n\n\n\n\n";
 
 },{}],17:[function(require,module,exports){
 module.exports={"API_KEY":"AIzaSyCBmZfM9wovJA8wBB6OyvZO8KolR7gB3PA"}

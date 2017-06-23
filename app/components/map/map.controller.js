@@ -92,22 +92,18 @@ class mapController {
             for(let j=0; j<=25; j++){
             ctrl.$rootScope.results.push(
                 {
-                    title: ctrl.titles[j],
-                    distance: ctrl.distances[j],
-                    favorites: ctrl.favorites[j],
-                    size: ctrl.mSize[j],
-                    difficulty: ctrl.difficulty[j],
-                    terrain: ctrl.terrain[j]
+                    a: ctrl.titles[j],
+                    b: ctrl.distances[j],
+                    c: ctrl.favorites[j],
+                    d: ctrl.mSize[j],
+                    e: ctrl.difficulty[j],
+                    f: ctrl.terrain[j]
                 }
             );
         }
-            console.log(ctrl.$rootScope.results);
             
         },500)
         
-        
-
-        ctrl.$rootScope.distances = "hello !"
         
     }
     

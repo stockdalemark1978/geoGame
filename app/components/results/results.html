@@ -3,41 +3,22 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Geocache Name</th>
-        <th>Distance</th>
-        <th>Favorites</th>
-        <th>Size</th>
-        <th>Difficulty</th>
-        <th>Terrain</th>
+        <th ng:repeat="(i,th) in $ctrl.$rootScope.headers" ng:class="$ctrl.selectedCls(i)" ng:click="$ctrl.changeSorting(i)" ng:click="$ctrl.selectedCls(i)">{{th}}</th>
       </tr> 
   </thead>
     <tbody>
-       <tr ng-repeat="result in $ctrl.$rootScope.results | orderBy:'distance'">
-        <td>{{result.title}}</td>
-        <td>{{result.distance}} mi</td>
-        <td>{{result.favorites}}</td>
-        <td>{{result.size}}</td>
-        <td>{{result.difficulty}}</td>
-        <td>{{result.terrain}}</td>
+       <tr ng:repeat="result in $ctrl.$rootScope.results | orderBy: $ctrl.sort.column">
+        <td>{{result.a}}</td>
+        <td>{{result.b}} mi</td>
+        <td>{{result.c}}</td>
+        <td>{{result.d}}</td>
+        <td>{{result.e}}</td>
+        <td>{{result.f}}</td>
       </tr>   
-
-
-      <!--<tr ng-repeat="result in $ctrl.results">
-        <td>{{result.name}}</td>
-        <td>{{result.price}}</td>
-        <td>{{result.selected}}</td>
-        <td>{{result.terrain}}</td>
-        <td>{{result.lastFound}}</td>
-      </tr>    -->
-      
     </tbody>
   </table>
 </div>
-<!--<div ng-repeat="result in $ctrl.results">{{result.name}}</div>-->
 
-<!--<h1>{{$ctrl.results[1].name}}</h1>-->
-
-<!--<h1>{{$ctrl.$rootScope.distances}}</h1>-->
 
 
 

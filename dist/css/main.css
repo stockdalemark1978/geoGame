@@ -76,3 +76,6 @@ ul.nav.navbar-nav.navbar-right {
 #logoli {
   width: 200px; }
 
+thead {
+  border-bottom: 2px solid black;
+  cursor: pointer; }
