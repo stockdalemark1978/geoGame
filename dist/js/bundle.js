@@ -128,6 +128,7 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
     ctrl.mSize = [];
     ctrl.difficulty = [];
     ctrl.terrain = [];
+    ctrl.sizeID = [];
 
     ctrl.$rootScope.results = [];
 
@@ -184,6 +185,7 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
             ctrl.sizeSelect = Math.floor(Math.random() * 5);
             ctrl.s = ctrl.size[ctrl.sizeSelect];
             ctrl.mSize.push(ctrl.s);
+            ctrl.sizeID.push(ctrl.sizeSelect);
 
             ctrl.hardness = (Math.round(Math.random() * 100) / 10).toFixed(1);
             ctrl.difficulty.push(ctrl.hardness);
@@ -193,13 +195,6 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
         }
     });
 
-    // for (var j = 0; j<=25; j++){
-    //     ctrl.$rootScope.results.push({
-    //         title: ctrl.titles[j];
-    //         distance: ctrl.distances[j];
-    //     });
-    //     }
-
     $timeout(function () {
         for (var j = 0; j <= 25; j++) {
             ctrl.$rootScope.results.push({
@@ -208,10 +203,11 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
                 c: ctrl.favorites[j],
                 d: ctrl.mSize[j],
                 e: ctrl.difficulty[j],
-                f: ctrl.terrain[j]
+                f: ctrl.terrain[j],
+                g: ctrl.sizeID[j]
             });
         }
-    }, 500);
+    }, 200);
 };
 
 exports.default = mapController;
@@ -335,7 +331,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var resultsComponent = {
     bindings: {},
     template: _results2.default,
-    controller: ['$rootScope', '$interval', _results4.default],
+    controller: ['$rootScope', '$interval', '$timeout', _results4.default],
     controllerAs: '$ctrl'
 };
 
@@ -348,51 +344,69 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var resultsController = function resultsController($rootScope, $interval) {
-    _classCallCheck(this, resultsController);
+var resultsController = function () {
+    function resultsController($rootScope, $interval, $timeout) {
+        _classCallCheck(this, resultsController);
 
-    var ctrl = this;
-    ctrl.$rootScope = $rootScope;
+        var ctrl = this;
+        ctrl.$rootScope = $rootScope;
 
-    ctrl.$rootScope.headers = {
-        a: "Geocache Name",
-        b: "Distance",
-        c: "Favorites",
-        d: "Size",
-        e: "Difficulty",
-        f: "Terrain"
-    };
+        ctrl.$rootScope.headers = {
+            a: "Geocache Name",
+            b: "Distance",
+            c: "Favorites",
+            d: "Size",
+            e: "Difficulty",
+            f: "Terrain"
+        };
 
-    ctrl.sort = {
-        column: 'b',
-        descending: false
-    };
+        ctrl.sort = {
+            column: 'b',
+            descending: false
+        };
+    }
 
-    ctrl.selectedCls = function (column) {
-        return column == ctrl.sort.column;
-    };
+    _createClass(resultsController, [{
+        key: "changeSorting",
+        value: function changeSorting(column) {
+            var ctrl = this;
+            var sort = ctrl.sort;
+            if (column == "d" || column == "-d") {
+                if (sort.column == "g") {
+                    sort.descending = !sort.descending;
+                    if (sort.descending == true) {
+                        sort.column = "-" + "g";
+                    }
+                } else {
+                    sort.column = "g";
+                    sort.descending = false;
+                }
+            } else {
 
-    ctrl.changeSorting = function (column) {
-        var sort = ctrl.sort;
-        if (sort.column == column) {
-            sort.descending = !sort.descending;
-            if (sort.descending == true) {
-                sort.column = "-" + sort.column;
-                console.log(sort.column);
-            }
-        } else {
-            sort.column = column;
-            sort.descending = false;
+                if (sort.column == column) {
+                    sort.descending = !sort.descending;
+                    if (sort.descending == true) {
+                        sort.column = "-" + sort.column;
+                    }
+                } else {
+                    sort.column = column;
+                    sort.descending = false;
+                }
+            };
         }
-    };
-};
+    }]);
+
+    return resultsController;
+}();
 
 exports.default = resultsController;
 
 },{}],16:[function(require,module,exports){
-module.exports = "<h1>Results</h1>\n<div class=\"table-responsive\">\n  <table class=\"table\">\n    <thead>\n      <tr>\n        <th ng:repeat=\"(i,th) in $ctrl.$rootScope.headers\" ng:class=\"$ctrl.selectedCls(i)\" ng:click=\"$ctrl.changeSorting(i)\" ng:click=\"$ctrl.selectedCls(i)\">{{th}}</th>\n      </tr> \n  </thead>\n    <tbody>\n       <tr ng:repeat=\"result in $ctrl.$rootScope.results | orderBy: $ctrl.sort.column\">\n        <td>{{result.a}}</td>\n        <td>{{result.b}} mi</td>\n        <td>{{result.c}}</td>\n        <td>{{result.d}}</td>\n        <td>{{result.e}}</td>\n        <td>{{result.f}}</td>\n      </tr>   \n    </tbody>\n  </table>\n</div>\n\n\n\n\n";
+module.exports = "<h1>Results</h1>\n<div class=\"table-responsive\">\n  <table class=\"table\">\n    <thead>\n      <tr>\n        <th ng:repeat=\"(i,th) in $ctrl.$rootScope.headers\" ng:click=\"$ctrl.changeSorting(i)\">{{th}}</th>\n      </tr> \n  </thead>\n    <tbody>\n       <tr ng:repeat=\"result in $ctrl.$rootScope.results | orderBy: $ctrl.sort.column\">\n        <td>{{result.a}}</td>\n        <td>{{result.b}} mi</td>\n        <td>{{result.c}}</td>\n        <td>{{result.d}}</td>\n        <td>{{result.e}}</td>\n        <td>{{result.f}}</td>\n      </tr>   \n    </tbody>\n  </table>\n</div>\n\n\n\n\n";
 
 },{}],17:[function(require,module,exports){
 module.exports={"API_KEY":"AIzaSyCBmZfM9wovJA8wBB6OyvZO8KolR7gB3PA"}

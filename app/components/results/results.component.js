@@ -4,7 +4,7 @@ import controller from './results.controller';
 let resultsComponent = {
     bindings: {},
     template,
-    controller: ['$rootScope', '$interval', controller],
+    controller: ['$rootScope', '$interval', '$timeout', controller],
     controllerAs: '$ctrl'
 };
 

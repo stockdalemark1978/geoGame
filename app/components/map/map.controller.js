@@ -13,6 +13,7 @@ class mapController {
         ctrl.mSize = [];
         ctrl.difficulty = [];
         ctrl.terrain = [];
+        ctrl.sizeID = [];
 
         ctrl.$rootScope.results = [];
 
@@ -71,6 +72,7 @@ class mapController {
                 ctrl.sizeSelect = Math.floor(Math.random() * 5);
                 ctrl.s = ctrl.size[ctrl.sizeSelect];
                 ctrl.mSize.push(ctrl.s);
+                ctrl.sizeID.push(ctrl.sizeSelect);
 
                 ctrl.hardness = ((Math.round(Math.random() * 100))/10).toFixed(1);
                 ctrl.difficulty.push(ctrl.hardness);
@@ -81,13 +83,6 @@ class mapController {
             }  
         });
         
-        // for (var j = 0; j<=25; j++){
-        //     ctrl.$rootScope.results.push({
-        //         title: ctrl.titles[j];
-        //         distance: ctrl.distances[j];
-        //     });
-        //     }
-
         $timeout(function() {
             for(let j=0; j<=25; j++){
             ctrl.$rootScope.results.push(
@@ -97,12 +92,12 @@ class mapController {
                     c: ctrl.favorites[j],
                     d: ctrl.mSize[j],
                     e: ctrl.difficulty[j],
-                    f: ctrl.terrain[j]
+                    f: ctrl.terrain[j],
+                    g: ctrl.sizeID[j]
                 }
             );
         }
-            
-        },500)
+        },200)
         
         
     }

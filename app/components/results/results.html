@@ -3,7 +3,7 @@
   <table class="table">
     <thead>
       <tr>
-        <th ng:repeat="(i,th) in $ctrl.$rootScope.headers" ng:class="$ctrl.selectedCls(i)" ng:click="$ctrl.changeSorting(i)" ng:click="$ctrl.selectedCls(i)">{{th}}</th>
+        <th ng:repeat="(i,th) in $ctrl.$rootScope.headers" ng:click="$ctrl.changeSorting(i)">{{th}}</th>
       </tr> 
   </thead>
     <tbody>
