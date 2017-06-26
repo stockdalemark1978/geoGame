@@ -121,6 +121,7 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
 
     var ctrl = this;
     _googleMaps2.default.KEY = _env2.default.API_KEY;
+    _googleMaps2.default.LIBRARIES = ['geometry', 'places'];
     ctrl.$rootScope = $rootScope;
     ctrl.titles = [];
     ctrl.distances = [];
@@ -140,13 +141,72 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
                 lng: 150.644
             },
             scrollwheel: false,
-            zoom: 8
+            zoom: 8,
+            mapTypeId: 'roadmap'
         });
         ctrl.marker = new google.maps.Marker({
             position: { lat: -34.397,
                 lng: 150.644 },
             map: map
         });
+
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        map.addListener('bounds_changed', function () {
+            searchBox.setBounds(map.getBounds());
+        });
+
+        var markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function () {
+            var places = searchBox.getPlaces();
+
+            if (places.length == 0) {
+                return;
+            }
+
+            // Clear out the old markers.
+            markers.forEach(function (marker) {
+                marker.setMap(null);
+            });
+            markers = [];
+
+            // For each place, get the icon, name and location.
+            var bounds = new google.maps.LatLngBounds();
+            places.forEach(function (place) {
+                if (!place.geometry) {
+                    console.log("Returned place contains no geometry");
+                    return;
+                }
+                var icon = {
+                    url: place.icon,
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(25, 25)
+                };
+
+                // Create a marker for each place.
+                markers.push(new google.maps.Marker({
+                    map: map,
+                    icon: icon,
+                    title: place.name,
+                    position: place.geometry.location
+                }));
+
+                if (place.geometry.viewport) {
+                    // Only geocodes have viewport.
+                    bounds.union(place.geometry.viewport);
+                } else {
+                    bounds.extend(place.geometry.location);
+                }
+            });
+            map.fitBounds(bounds);
+        });
+
         var rad = function rad(x) {
             return x * Math.PI / 180;
         };
@@ -213,7 +273,7 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
 exports.default = mapController;
 
 },{"../../../dist/env.json":17,"google-maps":18}],7:[function(require,module,exports){
-module.exports = "<div class=\"container\" id=\"search\">\n\t<div class=\"row\">\n        <div class=\"col-sm-6 col-sm-offset-3\">\n            <div id=\"imaginary_container\"> \n                <div class=\"input-group stylish-input-group\">\n                    <input type=\"text\" class=\"form-control\"  placeholder=\"Search\" >\n                    <span class=\"input-group-addon\">\n                        <button type=\"submit\">\n                            <span class=\"glyphicon glyphicon-search\"></span>\n                        </button>  \n                    </span>\n                </div>\n            </div>\n        </div>\n\t</div>\n</div>\n\n\n\n<div id=\"map\" style=\"width:100%;height:500px\"></div>\n\n<!--<h1>{{$ctrl.$rootScope.mark}}</h1>\n<h2>{{$ctrl.title}}</h2>-->\n\n\n\n\n\n";
+module.exports = "<div class=\"container\" id=\"search\">\n    <div class=\"row\">\n        <div class=\"col-sm-6 col-sm-offset-3\">\n            <div id=\"imaginary_container\"> \n                <div class=\"input-group stylish-input-group\">\n                    <input type=\"text\" class=\"form-control\" id=\"pac-input\" placeholder=\"Search\" >\n                    \n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n\n\n<div id=\"map\" style=\"width:100%;height:500px\"></div>\n\n<!--<h1>{{$ctrl.$rootScope.mark}}</h1>\n<h2>{{$ctrl.title}}</h2>-->\n\n\n\n\n\n";
 
 },{}],8:[function(require,module,exports){
 'use strict';
