@@ -130,25 +130,29 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
     ctrl.difficulty = [];
     ctrl.terrain = [];
     ctrl.sizeID = [];
+    ctrl.newLat = 0;
+    ctrl.newLng = 0;
 
     ctrl.$rootScope.results = [];
 
     _googleMaps2.default.load(function (google) {
 
+        var markers = [];
         var map = new google.maps.Map(document.getElementById('map'), {
             center: {
-                lat: -34.397,
-                lng: 150.644
+                lat: 38.041,
+                lng: -84.504
             },
             scrollwheel: false,
-            zoom: 8,
+            zoom: 10,
             mapTypeId: 'roadmap'
         });
         ctrl.marker = new google.maps.Marker({
-            position: { lat: -34.397,
-                lng: 150.644 },
+            position: { lat: 38.041,
+                lng: -84.504 },
             map: map
         });
+        markers.push(ctrl.marker);
 
         var input = document.getElementById('pac-input');
         var searchBox = new google.maps.places.SearchBox(input);
@@ -158,7 +162,6 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
             searchBox.setBounds(map.getBounds());
         });
 
-        var markers = [];
         // Listen for the event fired when the user selects a prediction and retrieve
         // more details for that place.
         searchBox.addListener('places_changed', function () {
@@ -203,9 +206,13 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
                 } else {
                     bounds.extend(place.geometry.location);
                 }
+
+                createMarkers();
             });
             map.fitBounds(bounds);
         });
+
+        console.log();
 
         var rad = function rad(x) {
             return x * Math.PI / 180;
@@ -221,38 +228,57 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
             return d; // returns the distance in meter
         };
 
-        for (var i = 0; i <= 25; i++) {
-            ctrl.ranLat = Math.random() - 0.5;
-            ctrl.ranLng = Math.random() - 0.5;
-            ctrl.newmarker = new google.maps.Marker({
-                position: { lat: -34.397 + ctrl.ranLat,
-                    lng: 150.644 + ctrl.ranLng },
+        var createMarkers = function createMarkers() {
+
+            for (var i = 0; i <= 25; i++) {
+
+                var R = 6378137;
+
+                var w = 16093 * Math.sqrt(Math.random()) / 111300;
+                var t = 2 * Math.PI * Math.random();
+                var ranLat = w * Math.cos(t);
+                var ranLng = w * Math.sin(t);
+                console.log(ranLat);
+
+                ctrl.newmarker = new google.maps.Marker({
+                    position: { lat: ranLat + markers[0].position.lat(),
+                        lng: ranLng + markers[0].position.lng() },
+                    map: map,
+                    title: "Marker " + i.toString()
+                });
+
+                google.maps.event.addListener(ctrl.newmarker, 'click', function () {
+                    alert(this.title);
+                });
+                ctrl.titles.push(ctrl.newmarker.title);
+
+                var d = Math.round(getDistance(ctrl.newmarker.position, ctrl.marker.position) * 10) / 10;
+                ctrl.distances.push(d);
+
+                ctrl.ranFav = Math.floor(Math.random() * 100);
+                ctrl.favorites.push(ctrl.ranFav);
+
+                ctrl.size = ["XS", "S", "M", "L", "XL"];
+                ctrl.sizeSelect = Math.floor(Math.random() * 5);
+                ctrl.s = ctrl.size[ctrl.sizeSelect];
+                ctrl.mSize.push(ctrl.s);
+                ctrl.sizeID.push(ctrl.sizeSelect);
+
+                ctrl.hardness = (Math.round(Math.random() * 100) / 10).toFixed(1);
+                ctrl.difficulty.push(ctrl.hardness);
+
+                ctrl.hill = (Math.round(Math.random() * 100) / 10).toFixed(1);
+                ctrl.terrain.push(ctrl.hill);
+            }
+            var circle = new google.maps.Circle({
                 map: map,
-                title: "Marker " + i.toString()
+                radius: 16093, // 10 miles in metres
+                fillColor: '#AA0000',
+                fillOpacity: 0.01
             });
-            google.maps.event.addListener(ctrl.newmarker, 'click', function () {
-                alert(this.title);
-            });
-            ctrl.titles.push(ctrl.newmarker.title);
-
-            var d = Math.round(getDistance(ctrl.newmarker.position, ctrl.marker.position) * 10) / 10;
-            ctrl.distances.push(d);
-
-            ctrl.ranFav = Math.floor(Math.random() * 100);
-            ctrl.favorites.push(ctrl.ranFav);
-
-            ctrl.size = ["XS", "S", "M", "L", "XL"];
-            ctrl.sizeSelect = Math.floor(Math.random() * 5);
-            ctrl.s = ctrl.size[ctrl.sizeSelect];
-            ctrl.mSize.push(ctrl.s);
-            ctrl.sizeID.push(ctrl.sizeSelect);
-
-            ctrl.hardness = (Math.round(Math.random() * 100) / 10).toFixed(1);
-            ctrl.difficulty.push(ctrl.hardness);
-
-            ctrl.hill = (Math.round(Math.random() * 100) / 10).toFixed(1);
-            ctrl.terrain.push(ctrl.hill);
-        }
+            circle.bindTo('center', markers[0], 'position');
+        };
+        createMarkers();
     });
 
     $timeout(function () {
@@ -437,6 +463,7 @@ var resultsController = function () {
             var sort = ctrl.sort;
             if (column == "d" || column == "-d") {
                 if (sort.column == "g") {
+
                     sort.descending = !sort.descending;
                     if (sort.descending == true) {
                         sort.column = "-" + "g";

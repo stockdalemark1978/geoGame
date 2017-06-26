@@ -25,6 +25,7 @@ class resultsController {
         var sort = ctrl.sort;
         if(column == "d" || column == "-d"){
             if (sort.column == "g") {
+                
                 sort.descending = !sort.descending;
                 if(sort.descending==true){
                     sort.column = "-"+"g";
