@@ -135,6 +135,8 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
 
     ctrl.$rootScope.results = [];
 
+    ctrl.circle = {};
+
     _googleMaps2.default.load(function (google) {
 
         var markers = [];
@@ -165,6 +167,7 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
         // Listen for the event fired when the user selects a prediction and retrieve
         // more details for that place.
         searchBox.addListener('places_changed', function () {
+
             var places = searchBox.getPlaces();
 
             if (places.length == 0) {
@@ -176,6 +179,8 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
                 marker.setMap(null);
             });
             markers = [];
+
+            ctrl.circle.setMap(null);
 
             // For each place, get the icon, name and location.
             var bounds = new google.maps.LatLngBounds();
@@ -212,8 +217,6 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
             map.fitBounds(bounds);
         });
 
-        console.log();
-
         var rad = function rad(x) {
             return x * Math.PI / 180;
         };
@@ -238,21 +241,20 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
                 var t = 2 * Math.PI * Math.random();
                 var ranLat = w * Math.cos(t);
                 var ranLng = w * Math.sin(t);
-                console.log(ranLat);
 
-                ctrl.newmarker = new google.maps.Marker({
+                markers.push(new google.maps.Marker({
                     position: { lat: ranLat + markers[0].position.lat(),
                         lng: ranLng + markers[0].position.lng() },
                     map: map,
                     title: "Marker " + i.toString()
-                });
+                }));
 
-                google.maps.event.addListener(ctrl.newmarker, 'click', function () {
+                google.maps.event.addListener(markers[i + 1], 'click', function () {
                     alert(this.title);
                 });
-                ctrl.titles.push(ctrl.newmarker.title);
+                ctrl.titles.push(markers[i + 1].title);
 
-                var d = Math.round(getDistance(ctrl.newmarker.position, ctrl.marker.position) * 10) / 10;
+                var d = Math.round(getDistance(markers[i + 1].position, ctrl.marker.position) * 10) / 10;
                 ctrl.distances.push(d);
 
                 ctrl.ranFav = Math.floor(Math.random() * 100);
@@ -270,14 +272,16 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
                 ctrl.hill = (Math.round(Math.random() * 100) / 10).toFixed(1);
                 ctrl.terrain.push(ctrl.hill);
             }
-            var circle = new google.maps.Circle({
+
+            ctrl.circle = new google.maps.Circle({
                 map: map,
                 radius: 16093, // 10 miles in metres
                 fillColor: '#AA0000',
                 fillOpacity: 0.01
             });
-            circle.bindTo('center', markers[0], 'position');
+            ctrl.circle.bindTo('center', markers[0], 'position');
         };
+
         createMarkers();
     });
 
@@ -299,7 +303,7 @@ var mapController = function mapController($rootScope, $interval, $timeout) {
 exports.default = mapController;
 
 },{"../../../dist/env.json":17,"google-maps":18}],7:[function(require,module,exports){
-module.exports = "<div class=\"container\" id=\"search\">\n    <div class=\"row\">\n        <div class=\"col-sm-6 col-sm-offset-3\">\n            <div id=\"imaginary_container\"> \n                <div class=\"input-group stylish-input-group\">\n                    <input type=\"text\" class=\"form-control\" id=\"pac-input\" placeholder=\"Search\" >\n                    \n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n\n\n<div id=\"map\" style=\"width:100%;height:500px\"></div>\n\n<!--<h1>{{$ctrl.$rootScope.mark}}</h1>\n<h2>{{$ctrl.title}}</h2>-->\n\n\n\n\n\n";
+module.exports = "<div class=\"container\" id=\"search\">\n    <div class=\"row\">\n        <div class=\"col-sm-6 col-sm-offset-3\">\n            <div id=\"imaginary_container\"> \n                <div class=\"input-group stylish-input-group\">\n                    <input type=\"text\" class=\"form-control\" id=\"pac-input\" placeholder=\"Search\" >\n                    \n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n\n\n<div id=\"map\" style=\"width:100%;height:500px\"></div>\n<div class=\"btn-group pull-right\" role=\"group\" aria-label=\"...\">\n  <button type=\"button\" class=\"btn btn-default\">5 mi</button>\n  <button type=\"button\" class=\"btn btn-default\">10 mi</button>\n  <button type=\"button\" class=\"btn btn-default\">25 mi</button>\n</div>\n\n<!--<h1>{{$ctrl.$rootScope.mark}}</h1>\n<h2>{{$ctrl.title}}</h2>-->\n\n\n\n\n\n";
 
 },{}],8:[function(require,module,exports){
 'use strict';

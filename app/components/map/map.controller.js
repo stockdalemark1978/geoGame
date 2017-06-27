@@ -20,6 +20,9 @@ class mapController {
 
         ctrl.$rootScope.results = [];
 
+        ctrl.circle = {};
+
+
         GoogleMapsLoader.load(function (google) {
 
             var markers = [];
@@ -51,6 +54,7 @@ class mapController {
         // Listen for the event fired when the user selects a prediction and retrieve
         // more details for that place.
             searchBox.addListener('places_changed', function() {
+
               var places = searchBox.getPlaces();
 
               if (places.length == 0) {
@@ -61,7 +65,9 @@ class mapController {
               markers.forEach(function(marker) {
                 marker.setMap(null);
               });
-              markers = [];
+              markers = []; 
+
+              ctrl.circle.setMap(null);
 
               // For each place, get the icon, name and location.
               var bounds = new google.maps.LatLngBounds();
@@ -92,33 +98,32 @@ class mapController {
                 } else {
                   bounds.extend(place.geometry.location);
                 }
-
+                
                 createMarkers();
               });
               map.fitBounds(bounds);
             });
-            
-            console.log();
 
             let rad = function(x) {
             return x * Math.PI / 180;
             };
                 
             let getDistance = function(p1, p2) {
-            var R = 6378137; // Earth's mean radius in meter
-            var dLat = rad(p2.lat() - p1.lat());
-            var dLong = rad(p2.lng() - p1.lng());
-            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(rad(p1.lat())) * Math.cos(rad(p2.lat())) *
-            Math.sin(dLong / 2) * Math.sin(dLong / 2);
-            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            var d = R * c * 0.000621371;
-            return d; // returns the distance in meter
+                var R = 6378137; // Earth's mean radius in meter
+                var dLat = rad(p2.lat() - p1.lat());
+                var dLong = rad(p2.lng() - p1.lng());
+                var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(rad(p1.lat())) * Math.cos(rad(p2.lat())) *
+                Math.sin(dLong / 2) * Math.sin(dLong / 2);
+                var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                var d = R * c * 0.000621371;
+                return d; // returns the distance in meter
             };
 
             let createMarkers = function(){
 
             for(let i = 0; i<=25; i++){
+
 
                 var R = 6378137;
 
@@ -126,21 +131,20 @@ class mapController {
                 var t = 2 * Math.PI * Math.random();
                 var ranLat = w * Math.cos(t) 
                 var ranLng = w * Math.sin(t)
-                console.log(ranLat);
 
-                ctrl.newmarker = new google.maps.Marker({
+                markers.push(new google.maps.Marker({
                     position: {lat: ranLat + markers[0].position.lat(),
                     lng: ranLng+markers[0].position.lng()},
                     map: map,
                     title: "Marker " + i.toString()
-                });
+                }));
 
-                google.maps.event.addListener(ctrl.newmarker, 'click', function() {
+                google.maps.event.addListener(markers[i+1], 'click', function() {
                      alert(this.title);
                 });    
-                ctrl.titles.push(ctrl.newmarker.title);
+                ctrl.titles.push(markers[i+1].title);
 
-                let d = (Math.round(getDistance(ctrl.newmarker.position, ctrl.marker.position)*10)/10);
+                let d = (Math.round(getDistance(markers[i+1].position, ctrl.marker.position)*10)/10);
                 ctrl.distances.push(d);
 
                 ctrl.ranFav = Math.floor(Math.random() * 100);  
@@ -158,15 +162,17 @@ class mapController {
                 ctrl.hill = ((Math.round(Math.random() * 100))/10).toFixed(1);
                 ctrl.terrain.push(ctrl.hill);
             }
-                var circle = new google.maps.Circle({
+
+                ctrl.circle = new google.maps.Circle({
                   map: map,
                   radius: 16093,    // 10 miles in metres
                   fillColor: '#AA0000',
                   fillOpacity: 0.01
                 });
-                circle.bindTo('center', markers[0], 'position');
+                ctrl.circle.bindTo('center', markers[0], 'position');
                 
             }  
+
             createMarkers();
         });
         
